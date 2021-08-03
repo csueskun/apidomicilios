@@ -266,13 +266,13 @@ class EmpresaController extends Controller
         ->get();
 
         foreach ($data as $e) {
+            if($e->feedback==null){
+                $e->feedback = new \stdClass;
+                $e->feedback->puntaje = 0;
+            }
             try {
                 $e->feedback->puntaje = ($e->feedback->comida+$e->feedback->infraestructura+$e->feedback->personal+$e->feedback->precios+$e->feedback->servicio)/5;
             } catch (\Throwable $th) {
-            }
-            if(!$e->feedback){
-                $e->feedback = new \stdClass;
-                $e->feedback->puntaje = 0;
             }
         }
         
