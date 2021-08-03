@@ -265,11 +265,15 @@ class EmpresaController extends Controller
         ->distinct()
         ->get()->toArray();
 
+        $version = '';
+
         for ($i=0; $i < count($data); $i++) { 
             $e = $data[$i];
             try {
                 $e['feedback']['puntaje'] = ($e['feedback']['comida']+$e['feedback']['infraestructura']+$e['feedback']['personal']+$e['feedback']['precios']+$e['feedback']['servicio'])/5;
             } catch (\Throwable $th) {
+
+                $version = $th;
                 $e['feedback']= 0;
             }
         }
@@ -296,7 +300,7 @@ class EmpresaController extends Controller
         $pagination->pagination->to =  $to;
         $pagination->pagination->showing =  $to - $from + 1;
         $pagination->data =  $data;
-        $pagination->version =  101;
+        $pagination->version =  $version;
         
         return response()->json(['data' => $pagination]);
     }
