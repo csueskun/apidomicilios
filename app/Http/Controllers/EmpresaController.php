@@ -270,9 +270,11 @@ class EmpresaController extends Controller
                 $e->feedback = new \stdClass;
                 $e->feedback->puntaje = 0;
             }
-            try {
-                $e->feedback->puntaje = ($e->feedback->comida+$e->feedback->infraestructura+$e->feedback->personal+$e->feedback->precios+$e->feedback->servicio)/5;
-            } catch (\Throwable $th) {
+            else{
+                try {
+                    $e->feedback->puntaje = ($e->feedback->comida+$e->feedback->infraestructura+$e->feedback->personal+$e->feedback->precios+$e->feedback->servicio)/5;
+                } catch (\Throwable $th) {
+                }
             }
         }
         
@@ -285,6 +287,7 @@ class EmpresaController extends Controller
         $pagination->pagination->to =  $to;
         $pagination->pagination->showing =  $to - $from + 1;
         $pagination->data =  $data;
+        $pagination->version =  101;
         
         return response()->json(['data' => $pagination]);
     }
