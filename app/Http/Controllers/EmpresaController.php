@@ -265,8 +265,16 @@ class EmpresaController extends Controller
         ->distinct()
         ->get()->toArray();
 
-
+        for ($i=0; $i < count($data); $i++) { 
+            $e = $data[$i];
+            try {
+                $e['feedback']['puntaje'] = ($e['feedback']['comida']+$e['feedback']['infraestructura']+$e['feedback']['personal']+$e['feedback']['precios']+$e['feedback']['servicio'])/5;
+            } catch (\Throwable $th) {
+                $e['feedback']['puntaje'] = 0;
+            }
+        }
         // foreach ($data as $e) {
+
         //     if($e->feedback==null){
         //         $e->feedback = new \stdClass;
         //         $e->feedback->puntaje = 0;
