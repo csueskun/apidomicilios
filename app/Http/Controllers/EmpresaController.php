@@ -270,7 +270,7 @@ class EmpresaController extends Controller
             try {
                 $e['feedback']['puntaje'] = ($e['feedback']['comida']+$e['feedback']['infraestructura']+$e['feedback']['personal']+$e['feedback']['precios']+$e['feedback']['servicio'])/5;
             } catch (\Throwable $th) {
-                $e['feedback']['puntaje'] = 0;
+                $e['feedback']= 0;
             }
         }
         // foreach ($data as $e) {
