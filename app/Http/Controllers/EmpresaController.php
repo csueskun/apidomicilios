@@ -265,7 +265,6 @@ class EmpresaController extends Controller
         ->distinct()
         ->get()->toArray();
 
-        $version = '';
 
         for ($i=0; $i < count($data); $i++) { 
             $e = $data[$i];
@@ -276,8 +275,7 @@ class EmpresaController extends Controller
         }
         for ($i=0; $i < count($data); $i++) {
             if(!$data[$i]['feedback']){
-                $version = 666;
-                $data[$i] = ['puntaje'=>0];
+                $data[$i]['feedback'] = ['puntaje'=>0];
             }
         }
 
@@ -304,7 +302,6 @@ class EmpresaController extends Controller
         $pagination->pagination->to =  $to;
         $pagination->pagination->showing =  $to - $from + 1;
         $pagination->data =  $data;
-        $pagination->version =  $version;
         
         return response()->json(['data' => $pagination]);
     }
