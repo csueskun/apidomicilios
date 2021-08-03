@@ -272,11 +272,15 @@ class EmpresaController extends Controller
             try {
                 $e['feedback']['puntaje'] = ($e['feedback']['comida']+$e['feedback']['infraestructura']+$e['feedback']['personal']+$e['feedback']['precios']+$e['feedback']['servicio'])/5;
             } catch (\Throwable $th) {
-
-                $version = $th;
-                $e['feedback']= 0;
             }
         }
+        for ($i=0; $i < count($data); $i++) {
+            if(!$data[$i]['feedback']){
+                $version = 666;
+                $data[$i] = ['puntaje'=>0];
+            }
+        }
+
         // foreach ($data as $e) {
 
         //     if($e->feedback==null){
