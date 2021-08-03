@@ -263,7 +263,7 @@ class EmpresaController extends Controller
         ->skip($skip)
         ->take($per_page)
         ->distinct()
-        ->get();
+        ->get()->toArray();
 
         foreach ($data as $e) {
             if($e->feedback==null){
