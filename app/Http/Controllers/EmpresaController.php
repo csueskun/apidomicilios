@@ -154,6 +154,9 @@ class EmpresaController extends Controller
         foreach($fields as $field){
             $model->$field = $request->input($field);
         }
+        if(!$model->id){
+            $model->codemp = $this->_nextEmpresa();
+        }
         $res = $model->save();
         if($res){
             foreach($grupos as $grupo){
@@ -509,5 +512,22 @@ class EmpresaController extends Controller
         $clases = Clase::with('grupos')->get();
         return response()->json(['clases' => $clases], 200);
     }
-
+    protected function _nextEmpresa() {
+        $empresa = Empresa::select('codemp')->orderBy('codemp', 'desc')->limit(1)->first();
+        $code = '00000';
+        $err = null;
+        if($empresa){
+            $code = $empresa->codemp;
+        }
+        try {
+            $code = intval($code);
+            $code = str_pad(++$code, 5, "0", STR_PAD_LEFT);
+        } catch (\Throwable $th) {
+            $code = '00000';
+        }
+        return $code;
+    }
+    public function nextEmpresa() {
+        return response()->json(['codemp' => $this->_nextEmpresa()], 200);
+    }
 }

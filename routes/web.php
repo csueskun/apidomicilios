@@ -50,6 +50,7 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
     $router->patch('/empresa/{id}', 'EmpresaController@patch');
     $router->delete('/empresa/{id}', 'EmpresaController@delete');
     $router->get('/prepare/empresa', 'EmpresaController@prepareNew');
+    $router->get('/next/empresa', 'EmpresaController@nextEmpresa');
 
     // TIPOPRODUCTO
     $router->get('/tipoproducto', 'TipoProductoController@get');
