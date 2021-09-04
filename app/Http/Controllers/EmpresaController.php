@@ -198,7 +198,7 @@ class EmpresaController extends Controller
             $pagination->pagination->grupo = intval($params['grupo']);
         }
         if(array_key_exists('grupo_in', $params)){
-            $pagination->pagination->grupo = intval($params['grupo_in']);
+            $pagination->pagination->grupo = $params['grupo_in'];
         }
         if(array_key_exists('nombre', $params)){
             $where[] = ['empresa.nombre', 'like', '%'.$params['nombre'].'%']; 
