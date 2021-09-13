@@ -16,11 +16,11 @@ class ProductoController extends Controller
      ];
 
     protected $rules = [
-        'codigo' => 'required|unique:producto', 'descripcion' => 'required',  'detalle' => 'required', 
+        'codigo' => 'required|unique:producto', 'descripcion' => 'required',  'detalle' => '', 
         'empresa_id' => 'required', 'tipoproducto_id' => 'required', 'tipocategoria_id' => 'required', 'observacion' => '', 
-        'tamano' => 'required', 'precio1' => 'required', 'precio2' => '', 'precio3' => '', 
+        'tamano' => '', 'precio1' => 'required', 'precio2' => '', 'precio3' => '', 
         'precio4' => '', 'imagen' => '', 'imagen2' => '', 'imagen3' => '','impco' => '', 'iva' => '', 'combo' => '', 'compuesto' => '', 
-        'unidad' => '', 'marca' => '', 'terminado' => '', 'prioridad' => 'required', 
+        'unidad' => '', 'marca' => '', 'terminado' => '', 'prioridad' => '', 
         'bodega' => '', 'etiquetas' => '', 'estado' => 'required'
     ];
     
@@ -185,10 +185,10 @@ class ProductoController extends Controller
     public function delete(Request $request, $id){
         $res = Producto::destroy($id);
         if($res){
-            return response()->json(['data' => $model]);
+            return response()->json(['data' => $res]);
         }
         else{
-            return response()->json(['data' => $res], 422);
+            return response()->json(['error' => ''], 422);
         }
     }
     

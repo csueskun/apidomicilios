@@ -159,14 +159,14 @@ class EmpresaController extends Controller
         }
         $res = $model->save();
         if($res){
-            foreach($grupos as $grupo){
-                $ge = new GrupoEmpresa;
-                $ge->grupo_id = $grupo;
-                $ge->empresa_id = $model->id;
-                $ge->prioridad = 0;
-                $ge->estado = 1;
-                $ge->save();
-            }
+            // foreach($grupos as $grupo){
+            //     $ge = new GrupoEmpresa;
+            //     $ge->grupo_id = $grupo;
+            //     $ge->empresa_id = $model->id;
+            //     $ge->prioridad = 0;
+            //     $ge->estado = 1;
+            //     $ge->save();
+            // }
             return response()->json(['data' => $model]);
         }
         else{
