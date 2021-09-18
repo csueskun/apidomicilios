@@ -216,4 +216,12 @@ $router->group(['middleware' => 'auth'], function () use ($router) {
 	$router->get('/pedido', 'PedidoController@get');
 	$router->get('/toconfirm/pedido/{phone}', 'PedidoController@toConfirm');
     $router->post('/confirm/pedido', 'PedidoController@confirm');
+
+	// HORARIO
+    $router->get('/horario', 'HorarioController@get');
+    $router->get('/horario/{id}', 'HorarioController@find');
+    $router->put('/horario/{id}', 'HorarioController@put');
+    $router->post('/horario', 'HorarioController@new');
+    $router->patch('/horario/{id}', 'HorarioController@patch');
+    $router->delete('/horario/{id}', 'HorarioController@delete');
 });
